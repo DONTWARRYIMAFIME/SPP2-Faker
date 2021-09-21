@@ -6,4 +6,8 @@
         <RootNamespace>SPP2_Faker</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Generator\System" />
+    </ItemGroup>
+
 </Project>

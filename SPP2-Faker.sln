@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPP2-Faker", "SPP2-Faker\SPP2-Faker.csproj", "{5F36F90E-BA99-495D-A76C-25A03F20F876}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins\Plugins.csproj", "{EA963A02-D500-4C92-A78C-F018741552E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{5F36F90E-BA99-495D-A76C-25A03F20F876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F36F90E-BA99-495D-A76C-25A03F20F876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F36F90E-BA99-495D-A76C-25A03F20F876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA963A02-D500-4C92-A78C-F018741552E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA963A02-D500-4C92-A78C-F018741552E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA963A02-D500-4C92-A78C-F018741552E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA963A02-D500-4C92-A78C-F018741552E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
