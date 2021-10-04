@@ -1,0 +1,25 @@
+﻿using System;
+using Generator.SDK;
+
+namespace Plugin.StringGenerator
+{
+    public class StringGenerator:IGenerator
+    {
+        public Type Type => typeof(string);
+        
+        private readonly Random _random;
+
+        public StringGenerator(Random random)
+        {
+            _random = random;
+        }
+        
+        public object Generate()
+        {
+            var bytes = new byte[_random.Next(0, 16)];
+            _random.NextBytes(bytes);
+            return Convert.ToBase64String(bytes);
+        }
+        
+    }
+}
