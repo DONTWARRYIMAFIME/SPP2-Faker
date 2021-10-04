@@ -1,17 +1,26 @@
 using System;
+using Generator.SDK;
 
 namespace SPP2_Faker.Generator.Primitive
 {
-    public class DecimalGenerator:Generator<decimal, decimal>
+    public class DecimalGenerator:IGenerator
     {
-        public override decimal Generate()
+        public Type Type => typeof(double);
+        
+        private readonly Random _random;
+        
+        public DecimalGenerator(Random random)
         {
-            return Generate(decimal.MinValue, decimal.MaxValue);
+            _random = random;
         }
-
-        public override decimal Generate(decimal min, decimal max)
+        
+        public object Generate()
         {
-            return (decimal)Random.NextDouble() * (max - min) + min;
+            var mantissa = (_random.NextDouble() * 2.0) - 1.0;
+            var exponent = Math.Pow(2.0, _random.Next(-93, 96));
+            
+            return (decimal)(mantissa * exponent);
         }
+        
     }
 }

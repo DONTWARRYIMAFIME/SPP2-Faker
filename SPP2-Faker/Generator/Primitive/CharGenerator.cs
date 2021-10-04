@@ -1,17 +1,22 @@
 using System;
+using Generator.SDK;
 
 namespace SPP2_Faker.Generator.Primitive
 {
-    public class CharGenerator:Generator<char, int>
+    public class CharGenerator:IGenerator
     {
-        public override char Generate()
+        public Type Type => typeof(char);
+        
+        private readonly Random _random;
+        
+        public CharGenerator(Random random)
         {
-            return Generate(char.MinValue, char.MaxValue);
+            _random = random;
         }
 
-        public override char Generate(int min, int max)
+        public object Generate()
         {
-            return (char)Random.Next(min, max);
+            return (char)_random.Next('A', 'z'); 
         }
     }
 }

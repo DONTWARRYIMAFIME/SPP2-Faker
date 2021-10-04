@@ -1,17 +1,23 @@
 using System;
+using Generator.SDK;
 
 namespace SPP2_Faker.Generator.Primitive
 {
-    public class IntGenerator:Generator<int, int>
+    public class IntGenerator:IGenerator
     {
-        public override int Generate()
+        public Type Type => typeof(int);
+        
+        private readonly Random _random;
+        
+        public IntGenerator(Random random)
         {
-            return Generate(int.MinValue, int.MaxValue);
+            _random = random;
         }
-
-        public override int Generate(int min, int max)
+        
+        public object Generate()
         {
-            return Random.Next(min, max);
+            return _random.Next(int.MinValue, int.MaxValue);
         }
+        
     }
 }

@@ -1,17 +1,23 @@
 using System;
+using Generator.SDK;
 
 namespace SPP2_Faker.Generator.Primitive
 {
-    public class BoolGenerator:Generator<bool, int>
+    public class BoolGenerator:IGenerator
     {
-        public override bool Generate()
+        public Type Type => typeof(bool);
+        
+        private readonly Random _random;
+        
+        public BoolGenerator(Random random)
         {
-            return Generate(0, 1);
+            _random = random;
         }
-
-        public override bool Generate(int min, int max)
+        
+        public object Generate()
         {
-            return Convert.ToBoolean(Random.Next(min, max));
+            return Convert.ToBoolean(_random.Next(2));
         }
+        
     }
 }

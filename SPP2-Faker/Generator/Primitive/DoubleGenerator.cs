@@ -1,17 +1,26 @@
 using System;
+using Generator.SDK;
 
 namespace SPP2_Faker.Generator.Primitive
 {
-    public class DoubleGenerator:Generator<double, double>
+    public class DoubleGenerator:IGenerator
     {
-        public override double Generate()
+        public Type Type => typeof(double);
+        
+        private readonly Random _random;
+        
+        public DoubleGenerator(Random random)
         {
-            return Generate(double.MinValue, double.MaxValue);
+            _random = random;
         }
 
-        public override double Generate(double min, double max)
+        public object Generate()
         {
-            return Random.NextDouble() * (max - min) + min;
+            var mantissa = (_random.NextDouble() * 2.0) - 1.0;
+            var exponent = Math.Pow(2.0, _random.Next(-1073, 1023));
+            
+            return mantissa * exponent;
         }
+        
     }
 }
