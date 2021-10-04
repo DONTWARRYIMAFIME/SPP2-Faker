@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Generator.SDK;
+using SPP2_Faker.Generator.Collection;
 using SPP2_Faker.Generator.Primitive;
 using SPP2_Faker.Generator.System;
 
@@ -10,11 +11,13 @@ namespace SPP2_Faker.Generator
     public static class GeneratorsDictionary
     {
         private static readonly Dictionary<Type, IGenerator> Generators = new();
+        private static readonly Dictionary<Type, ICollectionGenerator> CollectionGenerators = new();
         private static readonly Random Random = new();
-        
+
         static GeneratorsDictionary()
         {
             SetupGenerators();
+            SetupCollectionGenerators();
             LoadPluginGenerators();
         }
 
@@ -29,6 +32,11 @@ namespace SPP2_Faker.Generator
             Generators.Add(typeof(int), new IntGenerator(Random));
             Generators.Add(typeof(short), new ShortGenerator(Random));
             Generators.Add(typeof(DateTime), new DateTimeGenerator(Random));
+        }
+
+        private static void SetupCollectionGenerators()
+        {
+            CollectionGenerators.Add(typeof(List<>), new ListGenerator(Random));
         }
 
         private static void LoadPluginGenerators()
@@ -46,6 +54,12 @@ namespace SPP2_Faker.Generator
         public static IGenerator GetGenerator(Type type)
         {
             Generators.TryGetValue(type, out var result);
+            return result;
+        }
+        
+        public static ICollectionGenerator GetCollectionGenerator(Type type)
+        {
+            CollectionGenerators.TryGetValue(type, out var result);
             return result;
         }
         

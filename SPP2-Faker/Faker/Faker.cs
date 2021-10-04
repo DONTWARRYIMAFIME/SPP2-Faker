@@ -28,7 +28,13 @@ namespace SPP2_Faker.Faker
             
             if (type.IsGenericType)
             {
-                return generator.Generate();
+                var collectionType = type.GetGenericTypeDefinition();
+
+                var collectionGenerator = GeneratorsDictionary.GetCollectionGenerator(collectionType);
+                if (collectionGenerator != null)
+                {
+                    return collectionGenerator.Generate(type, Create);
+                }
             }
             else if (type.IsClass)
             {
