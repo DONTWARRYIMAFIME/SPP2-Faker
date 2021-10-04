@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SPP2_Faker.Generator;
@@ -11,8 +10,8 @@ namespace SPP2_Faker.Faker
 {
     public class Faker
     {
-        private readonly Stack<Type> _cycleDependencyResolver = new();
-
+        private readonly CycleDependencyResolver _resolver = new();
+        
         public T Create<T>()
         {
             return (T)Create(typeof(T));
@@ -29,22 +28,31 @@ namespace SPP2_Faker.Faker
             if (type.IsGenericType)
             {
                 var collectionType = type.GetGenericTypeDefinition();
+                var argumentType = type.GetGenericArguments().Single();
 
-                var collectionGenerator = GeneratorsDictionary.GetCollectionGenerator(collectionType);
-                if (collectionGenerator != null)
+                if (_resolver.IsCycleDependencyDetected(argumentType))
                 {
-                    return collectionGenerator.Generate(type, Create);
-                }
-            }
-            else if (type.IsClass)
-            {
-                if (_cycleDependencyResolver.Contains(type))
-                {
-                    Console.WriteLine("[WARN] Cycle dependency detected");
                     return null;
                 }
                 
-                _cycleDependencyResolver.Push(type);
+                _resolver.PushType(argumentType);
+                
+                var collectionGenerator = GeneratorsDictionary.GetCollectionGenerator(collectionType);
+                if (collectionGenerator != null)
+                {
+                    return collectionGenerator.Generate(type, argumentType, Create);
+                }
+                
+                _resolver.PopType();
+            }
+            else if (type.IsClass)
+            {
+                if (_resolver.IsCycleDependencyDetected(type))
+                {
+                    return null;
+                }
+                
+                _resolver.PushType(type);
                 
                 var constructor = GetConstructorWithMaxParametersCount(type);
                 if (constructor == null)
@@ -56,12 +64,19 @@ namespace SPP2_Faker.Faker
                 FillPublicFields(result);
                 FillPublicProperties(result);
                 
-                _cycleDependencyResolver.Pop();
+                _resolver.PopType();
 
                 return result;
             }
-
-            return Activator.CreateInstance(type);
+            
+            try
+            {
+                return Activator.CreateInstance(type);
+            }
+            catch (MissingMethodException)
+            {
+                return default;
+            }
         }
 
         private object CreateUsingConstructor(ConstructorInfo constructor)

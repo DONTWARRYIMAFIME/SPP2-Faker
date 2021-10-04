@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace SPP2_Faker.Faker
 {
@@ -10,8 +9,6 @@ namespace SPP2_Faker.Faker
         private readonly float _float1;
         public float _float2;
         private readonly DateTime _date1;
-
-        //public IEnumerable<DateTime> list;
         
         private DateTime Date2 { get; set; }
 

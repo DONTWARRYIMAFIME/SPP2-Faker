@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Generator.SDK;
 
 namespace SPP2_Faker.Generator.Collection
@@ -17,9 +16,8 @@ namespace SPP2_Faker.Generator.Collection
             _random = random;
         }
         
-        public object Generate(Type type, Func<Type, object> method)
+        public object Generate(Type type, Type argumentType, Func<Type, object> method)
         {
-            var argumentType = type.GetGenericArguments().Single();
             var result = (IList)Activator.CreateInstance(type);
 
             var count = _random.Next(8) + 8;
