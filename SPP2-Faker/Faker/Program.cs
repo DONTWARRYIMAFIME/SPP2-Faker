@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SPP2_Faker.Faker
 {
@@ -7,8 +8,16 @@ namespace SPP2_Faker.Faker
         static void Main(string[] args)
         {
             var faker = new Faker();
-            var foo = faker.Create<long>();
-            Console.WriteLine(foo);
+            //var foo = faker.Create<uint>();
+            var cycleDependencyTest = faker.Create<List<bool>>();
+            Console.Write(cycleDependencyTest);
+            
+            Console.WriteLine(cycleDependencyTest.Count);
+            
+            foreach (var i in cycleDependencyTest)
+            {
+                Console.Write(i + " ");
+            }
         }
     }
 }
