@@ -43,9 +43,9 @@ namespace Faker.Example2
         public char CharProperty { get; set; }
         public byte ByteField;
 
-        public List<C> C;
+        public C C;
 
-        public B(List<C> c)
+        public B(C c)
         {
             C = c;
         }

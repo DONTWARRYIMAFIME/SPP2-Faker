@@ -25,7 +25,6 @@ namespace Faker
             if (_stackTypeTrace.Contains(type))
             {
                 PrintMessage();
-                PopType();
                 return true;
             }
 
@@ -56,7 +55,7 @@ namespace Faker
         
         public void PushSkipType(Type type)
         {
-            _stackTypeTrace.Push(type);
+            _stackSkipTrace.Push(type);
         }
         
         public void PopSkipType()
