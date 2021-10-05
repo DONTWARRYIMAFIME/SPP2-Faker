@@ -1,7 +1,7 @@
 using System;
 using Generator.SDK;
 
-namespace SPP2_Faker.Generator.System
+namespace Generator.System
 {
     public class DateTimeGenerator:IGenerator
     {

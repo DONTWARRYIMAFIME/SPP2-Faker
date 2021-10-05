@@ -1,16 +1,20 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using SPP2_Faker.Generator;
+using Generator;
+using SPP2_Faker.Faker;
 
-//TODO: implement unit test
-//TODO: OPTIONAL. Implement custom generators support
-
-namespace SPP2_Faker.Faker
+namespace Faker
 {
     public class Faker
     {
         private readonly CycleDependencyResolver _resolver = new();
+        private readonly IFakerConfig _config;
+
+        public Faker(IFakerConfig config)
+        {
+            _config = config;
+        }
         
         public T Create<T>()
         {
@@ -35,7 +39,7 @@ namespace SPP2_Faker.Faker
                     return null;
                 }
                 
-                _resolver.PushType(argumentType);
+                _resolver.PushSkipType(argumentType);
                 
                 var collectionGenerator = GeneratorsDictionary.GetCollectionGenerator(collectionType);
                 if (collectionGenerator != null)
@@ -43,14 +47,11 @@ namespace SPP2_Faker.Faker
                     return collectionGenerator.Generate(type, argumentType, Create);
                 }
                 
-                _resolver.PopType();
+                _resolver.PopSkipType();
             }
             else if (type.IsClass)
             {
-                if (_resolver.IsCycleDependencyDetected(type))
-                {
-                    return null;
-                }
+
                 
                 _resolver.PushType(type);
                 
@@ -60,7 +61,7 @@ namespace SPP2_Faker.Faker
                     throw new ArgumentException("Class: " + type + " has no public constructors");
                 }
                 
-                var result =  CreateUsingConstructor(constructor);
+                var result =  CreateUsingConstructor(type, constructor);
                 FillPublicFields(result);
                 FillPublicProperties(result);
                 
@@ -79,13 +80,15 @@ namespace SPP2_Faker.Faker
             }
         }
 
-        private object CreateUsingConstructor(ConstructorInfo constructor)
+        private object CreateUsingConstructor(Type type, ConstructorInfo constructor)
         {
             try
             {
-                return constructor.Invoke(constructor.GetParameters()
-                    .Select(parameterInfo => Create(parameterInfo.ParameterType))
-                    .ToArray());
+                return constructor.Invoke((from parameterInfo in constructor.GetParameters()
+                    let customGenerator = _config.GetGenerator(parameterInfo, type)
+                    select customGenerator != null
+                        ? customGenerator.Generate()
+                        : Create(parameterInfo.ParameterType)).ToArray());
             }
             catch (TargetInvocationException e)
             {
@@ -99,7 +102,11 @@ namespace SPP2_Faker.Faker
             FieldInfo[] fields = instance.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
             foreach (FieldInfo field in fields)
             {
-                field.SetValue(instance, Create(field.FieldType));
+                var customGenerator = _config.GetGenerator(field);
+                field.SetValue(instance,
+                    customGenerator != null 
+                        ? customGenerator.Generate() 
+                        : Create(field.FieldType));
             }
         }
 
@@ -110,21 +117,28 @@ namespace SPP2_Faker.Faker
             {
                 if (property.CanWrite)
                 {
-                    property.SetValue(instance, Create(property.PropertyType));
+                    var customGenerator = _config.GetGenerator(property);
+                    property.SetValue(instance,
+                        customGenerator != null 
+                            ? customGenerator.Generate() 
+                            : Create(property.PropertyType));
                 }
             }
         }
         
         private static ConstructorInfo GetConstructorWithMaxParametersCount(Type type)
         {
-            var constructors = type.GetConstructors().ToList();
+            var constructors = type
+                .GetConstructors(BindingFlags.Instance | BindingFlags.Public)
+                .ToList();
+            
             constructors.Sort((x, y) =>
             {
                 var xx = x.GetParameters().Length;
                 var yy = y.GetParameters().Length;
                 return yy.CompareTo(xx);
             });
-            return constructors.FirstOrDefault(constructor => constructor.IsPublic);
+            return constructors.FirstOrDefault();
         }
 
     }

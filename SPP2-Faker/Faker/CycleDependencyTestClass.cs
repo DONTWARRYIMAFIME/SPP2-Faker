@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CustomGenerator;
 
 namespace SPP2_Faker.Faker
 {
@@ -10,11 +11,6 @@ namespace SPP2_Faker.Faker
         public int Int1 { get; set; }
         public int Int2 { get; set; }
 
-        public override string ToString()
-        {
-            return "Class CycleDependencyTestClass: { " + Int1 + ", " + Int2 + ", \n" + Property + " }";
-        }
-
         public class A
         {
             public B B { get; set; }
@@ -22,10 +18,6 @@ namespace SPP2_Faker.Faker
             public float Float1 { get; set; }
             public int Int2 { get; set; }
             
-            public override string ToString()
-            {
-                return "Class A: { " + Float1 + ", " + Int2 + ", \n" + B + " }";
-            }
         }
 
         public class B
@@ -35,10 +27,6 @@ namespace SPP2_Faker.Faker
             public long Long1 { get; set; }
             public bool Bool1 { get; set; }
             
-            public override string ToString()
-            {
-                return "Class B: { " + Long1 + ", " + Bool1 + ", \n" + C + " }";
-            }
         }
 
         public class C
@@ -48,27 +36,25 @@ namespace SPP2_Faker.Faker
             public DateTime Date1 { get; set; }
             public DateTime Date2 { get; set; }
             
-            public override string ToString()
-            {
-                return "Class C: { " + Date1 + ", " + Date2 + ", \n" + D + " }";
-            }
         }
         
         public class D
         {
+            public List<long> Longs;
+            
             private List<A> _a;
             
             public short Short1 { get; set; }
-            public string String1 { get; set; }
-
-            public D(List<A> a)
-            {
-                _a = a;
-            }
+            public string City1 { get; set; }
             
-            public override string ToString()
+            public string City2 { get; }
+
+            public string City3;
+            
+            public D(List<A> a, string city2)
             {
-                return "Class D: { " + Short1 + ", " + String1 + ", \n" + _a + " }";
+                City2 = city2;
+                _a = a;
             }
         }
     }

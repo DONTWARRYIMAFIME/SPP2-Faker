@@ -1,22 +1,22 @@
 using System;
 using Generator.SDK;
 
-namespace SPP2_Faker.Generator.Primitive
+namespace Generator.Primitive
 {
-    public class IntGenerator:IGenerator
+    public class BoolGenerator:IGenerator
     {
-        public Type Type => typeof(int);
+        public Type Type => typeof(bool);
         
         private readonly Random _random;
         
-        public IntGenerator(Random random)
+        public BoolGenerator(Random random)
         {
             _random = random;
         }
         
         public object Generate()
         {
-            return _random.Next(int.MinValue, int.MaxValue);
+            return Convert.ToBoolean(_random.Next(2));
         }
         
     }

@@ -1,15 +1,15 @@
 using System;
 using Generator.SDK;
 
-namespace SPP2_Faker.Generator.Primitive
+namespace Generator.Primitive
 {
-    public class DecimalGenerator:IGenerator
+    public class FloatGenerator:IGenerator
     {
-        public Type Type => typeof(double);
+        public Type Type => typeof(float);
         
         private readonly Random _random;
         
-        public DecimalGenerator(Random random)
+        public FloatGenerator(Random random)
         {
             _random = random;
         }
@@ -17,9 +17,9 @@ namespace SPP2_Faker.Generator.Primitive
         public object Generate()
         {
             var mantissa = (_random.NextDouble() * 2.0) - 1.0;
-            var exponent = Math.Pow(2.0, _random.Next(-93, 96));
+            var exponent = Math.Pow(2.0, _random.Next(-126, 128));
             
-            return (decimal)(mantissa * exponent);
+            return (float)(mantissa * exponent);
         }
         
     }

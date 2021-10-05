@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Generator.Collection;
+using Generator.Primitive;
 using Generator.SDK;
-using SPP2_Faker.Generator.Collection;
-using SPP2_Faker.Generator.Primitive;
-using SPP2_Faker.Generator.System;
+using Generator.System;
 
-namespace SPP2_Faker.Generator
+namespace Generator
 {
     public static class GeneratorsDictionary
     {
@@ -31,6 +31,7 @@ namespace SPP2_Faker.Generator
             Generators.Add(typeof(float), new FloatGenerator(Random));
             Generators.Add(typeof(int), new IntGenerator(Random));
             Generators.Add(typeof(short), new ShortGenerator(Random));
+            Generators.Add(typeof(ulong), new UlongGenerator(Random));
             Generators.Add(typeof(DateTime), new DateTimeGenerator(Random));
         }
 

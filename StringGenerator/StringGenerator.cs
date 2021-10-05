@@ -16,7 +16,7 @@ namespace Plugin.StringGenerator
         
         public object Generate()
         {
-            var bytes = new byte[_random.Next(0, 16)];
+            var bytes = new byte[_random.Next(16, 32)];
             _random.NextBytes(bytes);
             return Convert.ToBase64String(bytes);
         }

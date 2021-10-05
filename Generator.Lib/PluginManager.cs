@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Generator.SDK;
 
-namespace SPP2_Faker.Generator
+namespace Generator
 {
     public static class PluginManager
     {

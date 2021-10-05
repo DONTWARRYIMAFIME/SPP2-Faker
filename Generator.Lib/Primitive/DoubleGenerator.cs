@@ -1,7 +1,7 @@
 using System;
 using Generator.SDK;
 
-namespace SPP2_Faker.Generator.Primitive
+namespace Generator.Primitive
 {
     public class DoubleGenerator:IGenerator
     {

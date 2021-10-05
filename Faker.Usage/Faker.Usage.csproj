@@ -3,12 +3,16 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>SPP2_Faker</RootNamespace>
+        <RootNamespace>Faker.UsageExample</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CustomGenerator\CustomGenerator.csproj" />
-      <ProjectReference Include="..\Generator.SDK\Generator.SDK.csproj" />
+      <ProjectReference Include="..\Faker.Lib\Faker.Lib.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Example2" />
     </ItemGroup>
 
 </Project>

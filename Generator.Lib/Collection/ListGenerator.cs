@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Generator.SDK;
 
-namespace SPP2_Faker.Generator.Collection
+namespace Generator.Collection
 {
     public class ListGenerator:ICollectionGenerator
     {
@@ -20,7 +20,7 @@ namespace SPP2_Faker.Generator.Collection
         {
             var result = (IList)Activator.CreateInstance(type);
 
-            var count = _random.Next(8) + 8;
+            var count = _random.Next(4) + 2;
             for (var i = 0; i < count; i++)
             {
                 result?.Add(method(argumentType));
