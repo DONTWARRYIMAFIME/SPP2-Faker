@@ -15,7 +15,7 @@ namespace CustomGenerator
         {
             _cities = new List<string>()
             {
-                "Vlas", "Arseniy", "Oleg", "Erog", "Vanya", "Liza", "Denis", "Alex", "Anton", "Nastya"
+                "Vlas", "Arseniy", "Oleg", "Egor", "Vanya", "Liza", "Denis", "Alex", "Anton", "Nastya"
             };
         }
         

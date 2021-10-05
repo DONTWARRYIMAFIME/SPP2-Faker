@@ -9,7 +9,7 @@ namespace Generator
 {
     public static class PluginManager
     {
-        private const string Dir = "Plugins";
+        private const string Dir = "../../../../Plugins";
 
         public static Dictionary<Type, IGenerator> LoadPlugins(Random random)
         {

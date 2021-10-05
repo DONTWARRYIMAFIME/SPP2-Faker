@@ -1,2 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CKostyukovich_005FV_005FA_005CRiderProjects_005CSPP2_002DFaker_005CPlugin_002EStringGenerator_005CGenerator_002ESDK_002Edll/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CKostyukovich_005FV_005FA_005CRiderProjects_005CSPP2_002DFaker_005CPlugin_002EStringGenerator_005CGenerator_002ESDK_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0455e6a9_002Db58c_002D42bc_002D9612_002Dd3f526f9c069/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestGenerateExistingPrimitive" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::E62C1626-51F9-46DB-B67A-735572E1D79B::net5.0::Faker.Test.FakerTests.TestGenerateClass&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::E62C1626-51F9-46DB-B67A-735572E1D79B::net5.0::Faker.Test.FakerTests.TestCustomGenerator&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::E62C1626-51F9-46DB-B67A-735572E1D79B::net5.0::Faker.Test.FakerTests.TestCycleDependencyResolver&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

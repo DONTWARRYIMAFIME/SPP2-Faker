@@ -11,6 +11,10 @@ namespace Faker
         private readonly CycleDependencyResolver _resolver = new();
         private readonly IFakerConfig _config;
 
+        public Faker()
+        {
+        }
+        
         public Faker(IFakerConfig config)
         {
             _config = config;
@@ -88,7 +92,7 @@ namespace Faker
             try
             {
                 return constructor.Invoke((from parameterInfo in constructor.GetParameters()
-                    let customGenerator = _config.GetGenerator(parameterInfo, type)
+                    let customGenerator = _config?.GetGenerator(parameterInfo, type)
                     select customGenerator != null
                         ? customGenerator.Generate()
                         : Create(parameterInfo.ParameterType)).ToArray());
@@ -105,7 +109,7 @@ namespace Faker
             FieldInfo[] fields = instance.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
             foreach (FieldInfo field in fields)
             {
-                var customGenerator = _config.GetGenerator(field);
+                var customGenerator = _config?.GetGenerator(field);
                 field.SetValue(instance,
                     customGenerator != null 
                         ? customGenerator.Generate() 
@@ -120,7 +124,7 @@ namespace Faker
             {
                 if (property.CanWrite)
                 {
-                    var customGenerator = _config.GetGenerator(property);
+                    var customGenerator = _config?.GetGenerator(property);
                     property.SetValue(instance,
                         customGenerator != null 
                             ? customGenerator.Generate() 
