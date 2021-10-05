@@ -1,6 +1,6 @@
 using System;
 
-namespace Faker.UsageExample.Example1
+namespace Faker.UsageExample
 {
     public class Like
     {

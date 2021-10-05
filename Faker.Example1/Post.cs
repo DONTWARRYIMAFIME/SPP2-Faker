@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Faker.UsageExample.Example1
+namespace Faker.UsageExample
 {
     public class Post
     {

@@ -12,9 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomGenerator", "CustomGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.Lib", "Generator.Lib\Generator.Lib.csproj", "{307A30EF-1B64-4AE8-B93C-94792E4FF031}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faker.Usage", "Faker.Usage\Faker.Usage.csproj", "{D9FA16A7-628E-48B4-B23F-49A81746BF54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faker.Example1", "Faker.Example1\Faker.Example1.csproj", "{D9FA16A7-628E-48B4-B23F-49A81746BF54}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faker.Lib", "Faker.Lib\Faker.Lib.csproj", "{E4C7DBCC-B1A8-4D79-9C1D-39C4F2C64FFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faker.Example2", "Faker.Example2\Faker.Example2.csproj", "{73B065F0-28F3-470F-9F2B-8741E74ED2F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,5 +56,9 @@ Global
 		{E4C7DBCC-B1A8-4D79-9C1D-39C4F2C64FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4C7DBCC-B1A8-4D79-9C1D-39C4F2C64FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4C7DBCC-B1A8-4D79-9C1D-39C4F2C64FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B065F0-28F3-470F-9F2B-8741E74ED2F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B065F0-28F3-470F-9F2B-8741E74ED2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B065F0-28F3-470F-9F2B-8741E74ED2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B065F0-28F3-470F-9F2B-8741E74ED2F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

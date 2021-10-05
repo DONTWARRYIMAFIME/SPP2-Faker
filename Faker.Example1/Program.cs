@@ -3,7 +3,7 @@ using System.Text.Json;
 using CustomGenerator;
 using SPP2_Faker.Faker;
 
-namespace Faker.UsageExample.Example1
+namespace Faker.UsageExample
 {
     class Program
     {
@@ -17,7 +17,7 @@ namespace Faker.UsageExample.Example1
             
             var user = faker.Create<User>();
 
-            var jsonOptions = new JsonSerializerOptions() { IgnoreNullValues = true, IncludeFields = true, WriteIndented = true };
+            var jsonOptions = new JsonSerializerOptions() { IncludeFields = true, WriteIndented = true };
             var json = JsonSerializer.Serialize(user, jsonOptions);
             Console.WriteLine(json);
         }

@@ -51,7 +51,10 @@ namespace Faker
             }
             else if (type.IsClass)
             {
-
+                if (_resolver.IsCycleDependencyDetected(type))
+                {
+                    return null;
+                }
                 
                 _resolver.PushType(type);
                 

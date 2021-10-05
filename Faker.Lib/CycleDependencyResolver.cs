@@ -5,8 +5,12 @@ namespace Faker
 {
     public class CycleDependencyResolver
     {
+        private const string Message = "[WARN] Cycle dependency detected";
+        
         private readonly Stack<Type> _stackTypeTrace = new();
         private readonly Stack<Type> _stackSkipTrace = new();
+
+        private bool _printed;
 
         public bool IsCycleDependencyDetected(Type type)
         {
@@ -20,11 +24,21 @@ namespace Faker
 
             if (_stackTypeTrace.Contains(type))
             {
-                Console.WriteLine("[WARN] Cycle dependency detected");
+                PrintMessage();
+                PopType();
                 return true;
             }
 
             return false;
+        }
+
+        private void PrintMessage()
+        {
+            if (!_printed)
+            {
+                Console.WriteLine(Message);
+                _printed = true;
+            }
         }
 
         public void PushType(Type type)
@@ -34,7 +48,10 @@ namespace Faker
 
         public void PopType()
         {
-            _stackTypeTrace.Pop();
+            if (_stackTypeTrace.Count != 0)
+            {
+                _stackTypeTrace.Pop();
+            }
         }
         
         public void PushSkipType(Type type)
@@ -44,7 +61,10 @@ namespace Faker
         
         public void PopSkipType()
         {
-            _stackTypeTrace.Pop();
+            if (_stackSkipTrace.Count != 0)
+            {
+                _stackSkipTrace.Pop();
+            }
         }
         
     }
